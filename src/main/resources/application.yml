@@ -1,0 +1,89 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /EndTerm
+    
+  connection-timeout: 1200000
+spring:
+  jackson:
+    mapper:
+      DEFAULT_VIEW_INCLUSION: true 
+    serialization: 
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+      
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/EndTerm?useSSL=false
+    #url: jdbc:mysql://localhost:3306/sample?useSSL=false
+    username: root
+    password: 1234
+    #cachePrepStmts: true
+    #prepStmtCacheSize: 250
+    #prepStmtCacheSqlLimit: 2048
+    #useServerPrepStmts: true
+
+  jpa:
+    database: mysql
+    openInView: false
+    #show_sql: true
+    show_sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      # fixes Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+      hibernate.jdbc.lob.non_contextual_creation: true
+      
+
+  data:
+    jpa:
+      repositories.enabled: true
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: test@gmail.com 
+    password: test@123
+    # Other properties
+    properties:
+      mail:
+       smtp:
+         starttls:
+          enable: true
+       auth: true
+       connectiontimeout: 5000
+       timeout: 5000
+       writetimeout: 5000  
+  jmx:
+    default-domain: com.endTerm.EndTerm
+    
+      
+#logging:
+ # level:
+ #   org.springframework.web: INFO
+ #   org.springframework.security: DEBUG
+ #   org.springframework.jpa.hibernate: INFO
+ #  com.winggs.hiringopen.repository:  DEBUG
+ 
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+         
+     
+#  file: app.log
+  
+  
+security:
+  jwt:
+    token:
+      secret-key: AnilJavaDeveloper
+      expire-length: 72
